@@ -1,0 +1,262 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider     = "postgresql" //"mysql"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
+}
+
+enum UserRole {
+    USER
+    ADMIN
+}
+
+enum ArenaValues {
+    SPACE
+    GROUND
+}
+
+enum RarityValues {
+    COMMON
+    UNCOMMON
+    RARE
+    LEGENDARY
+}
+
+enum Aspects {
+    VILLAINY
+    HEROISM
+    VIGILANCE
+    CUNNING
+    AGGRESSION
+    COMMAND
+}
+
+model User {
+    id                    String                 @id @default(cuid())
+    emailVerified         DateTime?
+    image                 String?
+    accounts              Account[]
+    sessions              Session[]
+    email                 String                 @unique
+    name                  String?
+    username              String?                @unique
+    elo                   Int                    @default(1000)
+    password              String?
+    passwordGenerated     Boolean                @default(false)
+    role                  UserRole               @default(USER)
+    createdAt             DateTime               @default(now())
+    updatedAt             DateTime               @updatedAt
+    decks                 Deck[]                 @relation("UserDecks")
+    isTwoFactorEnabled    Boolean                @default(false)
+    twoFactorConfirmation TwoFactorConfirmation?
+
+    @@index([id])
+}
+
+model Card {
+    id                String       @id @default(uuid())
+    set               Set          @relation(fields: [setId], references: [id])
+    setId             String
+    cardNumber        Int
+    name              String
+    subtitle          String?
+    type              String
+    arena             ArenaValues?
+    aspects           Aspects[]
+    cost              Int
+    power             Int?
+    health            Int?
+    rarity            RarityValues
+    frontText         String?
+    backText          String?
+    epicAction        String?
+    doubleSided       Boolean
+    token             Boolean
+    unique            Boolean
+    artist            String?
+    frontImgUrl       String?
+    backImgUrl        String?
+    hyperspaceUrl     String?
+    hyperspaceBackUrl String?
+    banned            Boolean      @default(false)
+    createdAt         DateTime     @default(now())
+    updatedAt         DateTime     @updatedAt
+    leader            Leader?      @relation("LeaderCard")
+    base              Base?        @relation("BaseCard")
+    mainboard         Deck[]       @relation("Mainboard")
+    sideboard         Deck[]       @relation("Sideboard")
+    maybeboard        Deck[]       @relation("Maybeboard")
+
+    @@index([name])
+    @@index([setId])
+}
+
+model Set {
+    id            String   @id @default(uuid())
+    name          String
+    abbreviation  String
+    numberOfCards Int      @default(0)
+    setOrder      Int      @default(0)
+    releaseDate   DateTime @default(now())
+    official      Boolean  @default(false)
+    cards         Card[]
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+
+    @@index([name])
+}
+
+model Leader {
+    id               String   @id @default(uuid())
+    cardId           String   @unique
+    card             Card     @relation("LeaderCard", fields: [cardId], references: [id])
+    showcaseUrl      String?
+    showcaseBackUrl  String?
+    leaderPortaitUrl String
+    leaderBannerUrl  String
+    playStyle        String
+    difficulty       String
+    skillCeiling     String
+    description      String
+    howToPlay        String
+    usefulLinks      String
+    updatedAt        DateTime @updatedAt
+    deck             Deck[]   @relation("LeaderDecks")
+
+    @@index([id])
+}
+
+model Base {
+    id     String @id @default(uuid())
+    cardId String @unique
+    card   Card   @relation("BaseCard", fields: [cardId], references: [id])
+    decks  Deck[] @relation("BaseDecks")
+}
+
+model Deck {
+    id          Int      @id @default(autoincrement())
+    name        String
+    baseId      String   @unique
+    base        Base     @relation("BaseDecks", fields: [baseId], references: [id])
+    leaderId    String
+    leader      Leader   @relation("LeaderDecks", fields: [leaderId], references: [id])
+    mainboard   Card[]   @relation("Mainboard")
+    maybeboard  Card[]   @relation("Maybeboard")
+    sideboard   Card[]   @relation("Sideboard")
+    aiGenerated Boolean
+    type        String   @default("PUBLIC") // PUBLIC | PRIVATE | UNLISTED | OFFICIAL | TOURNAMENT
+    creatorName String
+    creatorId   String
+    likes       Int      @default(0)
+    views       Int      @default(0)
+    description String?
+    formatId    String
+    format      Format   @relation(fields: [formatId], references: [id])
+    creator     User     @relation("UserDecks", fields: [creatorId], references: [id])
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+
+    @@index([leaderId])
+    @@index([creatorId])
+    @@index([formatId])
+}
+
+model Format {
+    id           String   @id @default(uuid())
+    name         String
+    abbreviation String
+    description  String?
+    decks        Deck[]
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+}
+
+model Account {
+    id                String  @id @default(cuid())
+    userId            String  @unique
+    type              String
+    provider          String
+    providerAccountId String
+    refresh_token     String? @db.Text
+    access_token      String? @db.Text
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String? @db.Text
+    session_state     String?
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([provider, providerAccountId])
+}
+
+model Session {
+    id           String   @id @default(cuid())
+    sessionToken String   @unique
+    userId       String   @unique
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+    id      String   @id @default(cuid())
+    email   String
+    token   String   @unique
+    expires DateTime
+
+    @@unique([email, token])
+}
+
+model PasswordResetToken {
+    id      String   @id @default(cuid())
+    email   String
+    token   String   @unique
+    expires DateTime
+
+    @@unique([email, token])
+}
+
+model TwoFactorToken {
+    id      String   @id @default(cuid())
+    email   String
+    token   String   @unique
+    expires DateTime
+
+    @@unique([email, token])
+}
+
+model TwoFactorConfirmation {
+    id String @id @default(cuid())
+
+    userId String
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([userId])
+}
+
+model Activity {
+    id        Int      @id @default(autoincrement())
+    type      String
+    username  String
+    timestamp DateTime
+    data      Json
+}
+
+model Match {
+    id        String    @id @default(cuid())
+    tid       String?
+    players   String[]  @default([])
+    winner    String    @default("")
+    completed Boolean   @default(false)
+    ranked    Boolean   @default(false)
+    mode      String    @default("")
+    start     DateTime?
+    end       DateTime?
+    udata     Json[]
+}
