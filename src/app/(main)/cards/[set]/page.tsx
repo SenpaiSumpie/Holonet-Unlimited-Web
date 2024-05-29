@@ -9,23 +9,7 @@ import type { FC } from 'react';
 
 // import { getImagesBySet } from '@/modules/card-management/services/getImages';
 
-interface PageProps {
-    params: {
-        set: string;
-    };
-}
-
-export function generateStaticParams() {
-    const sets = ['sor', 'sog', 'tor'];
-
-    return sets.map((set) => {
-        return {
-            set
-        };
-    });
-}
-
-const page: FC<PageProps> = async () => {
+const page = () => {
     // const images: ImageProps[] =
     //     ((await getImagesBySet(params.set)) as ImageProps[]) || [];
 

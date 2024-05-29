@@ -36,7 +36,6 @@ import {
 import { Switch } from '@/ui/switch';
 import { CardData, CardResult } from '@/server/_cards';
 import { useSearchParams } from 'next/navigation';
-import { createCardAction, updateCardAction } from '../actions/_card-actions';
 import toast from 'react-hot-toast';
 import { toastStyles } from '@/lib/toast';
 import { useCardData } from '../contexts/card-data-context';
@@ -96,27 +95,10 @@ const CardsForms: FC<Props> = ({ cardId }) => {
 
         try {
             // Create cardResponse
-            let response: CardResult = {
+            const response: CardResult = {
                 Success: false,
                 Message: 'Error Occurred'
             };
-            //Create
-            if (state === 'add') {
-                //Create CardAction
-                response = await createCardAction(cardData, {
-                    selectedPage: searchParams.get('selectedPage') ?? 'cards',
-                    state: searchParams.get('state') ?? 'none',
-                    id: searchParams.get('id') ?? ''
-                });
-            }
-            //Get Card Ids
-            else if (state === 'edit') {
-                response = await updateCardAction(cardId, cardData, {
-                    selectedPage: searchParams.get('selectedPage') ?? 'cards',
-                    state: searchParams.get('state') ?? 'none',
-                    id: searchParams.get('id') ?? ''
-                });
-            }
 
             if (!response.Success) {
                 toast.error(response.Message, {

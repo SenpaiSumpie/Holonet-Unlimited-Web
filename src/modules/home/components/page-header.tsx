@@ -145,22 +145,20 @@ import { isUserAdmin } from '@/hooks/client-user';
 // ];
 
 export const PageHeader = () => {
-    const isAdmin = isUserAdmin();
-
     return (
-        <nav className="flex w-full justify-center border-b-2 border-black p-4 dark:border-white z-50">
+        <nav className="flex w-full justify-center mt-4 pb-4">
             <div className="container flex items-center gap-x-4">
                 <div className="flex items-center">
                     <Link href="/">
                         <span className="font-barlow text-header font-bold text-black dark:text-white">
-                            IMPERIAL DECK REGISTRY
+                            HOLONET UNLIMITED
                         </span>
                     </Link>
                 </div>
                 <div className="flex gap-x-2">
                     <NavigationMenu>
                         <NavigationMenuList>
-                            <NavigationMenuItem>
+                            {/* <NavigationMenuItem>
                                 <Link href={`/cards`}>
                                     <NavigationMenuTrigger>
                                         <div className="flex items-center gap-2">
@@ -219,8 +217,8 @@ export const PageHeader = () => {
                                         </li>
                                     </ul>
                                 </NavigationMenuContent>
-                            </NavigationMenuItem>
-                            <NavigationMenuItem>
+                            </NavigationMenuItem> */}
+                            {/* <NavigationMenuItem>
                                 <Link href={`/decks`}>
                                     <NavigationMenuTrigger>
                                         <div className="flex items-center gap-2">
@@ -393,113 +391,9 @@ export const PageHeader = () => {
                                         </li>
                                     </ul>
                                 </NavigationMenuContent>
-                            </NavigationMenuItem>
-                            {/* <NavigationMenuItem>
-                                <Link href={`/leaders`}>
-                                    <NavigationMenuLink
-                                        className={navigationMenuTriggerStyle()}
-                                    >
-                                        <div className="flex items-center gap-2">
-                                            <User2 size={14} />
-                                            <span
-                                                className={
-                                                    'font-barlow font-bold text-black dark:text-white'
-                                                }
-                                            >
-                                                LEADERS
-                                            </span>
-                                        </div>
-                                    </NavigationMenuLink>
-                                </Link>
                             </NavigationMenuItem> */}
+
                             {/* <NavigationMenuItem>
-                                <Link href={`/stats`}>
-                                    <NavigationMenuTrigger>
-                                        <div className="flex items-center gap-2">
-                                            <BarChart3 size={14} />
-                                            <span
-                                                className={
-                                                    'font-barlow font-bold text-black dark:text-white'
-                                                }
-                                            >
-                                                STATS
-                                            </span>
-                                        </div>
-                                    </NavigationMenuTrigger>
-                                </Link>
-                                <NavigationMenuContent>
-                                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                                        {statsMenu.map((component) => (
-                                            <ListItem
-                                                key={component.title}
-                                                title={component.title}
-                                                href={component.href}
-                                            >
-                                                {component.description}
-                                            </ListItem>
-                                        ))}
-                                    </ul>
-                                </NavigationMenuContent>
-                            </NavigationMenuItem> */}
-                            {isAdmin && (
-                                <NavigationMenuItem>
-                                    <Link href={`/decks`}>
-                                        <NavigationMenuTrigger>
-                                            <div className="flex items-center gap-2">
-                                                <Hammer size={14} />
-                                                <span
-                                                    className={
-                                                        'font-barlow font-bold text-black dark:text-white'
-                                                    }
-                                                >
-                                                    ADMIN TOOLS
-                                                </span>
-                                            </div>
-                                        </NavigationMenuTrigger>
-                                    </Link>
-                                    <NavigationMenuContent>
-                                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                                            <li>
-                                                <NavigationMenuLink asChild>
-                                                    <Link
-                                                        href="/tools/card-management"
-                                                        className="dark:hover:bg-accent-dark dark:hover:text-accent-dark-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent-dark focus:text-accent-dark-foreground block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors"
-                                                    >
-                                                        <div className="text-sm font-bold leading-none">
-                                                            CARD MANAGEMENT
-                                                        </div>
-                                                        <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
-                                                            Take control of your
-                                                            card collection with
-                                                            powerful management
-                                                            tools at your
-                                                            fingertips.
-                                                        </p>
-                                                    </Link>
-                                                </NavigationMenuLink>
-                                            </li>
-                                            <li>
-                                                <NavigationMenuLink asChild>
-                                                    <Link
-                                                        href="/tools/user-management"
-                                                        className="dark:hover:bg-accent-dark dark:hover:text-accent-dark-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent-dark focus:text-accent-dark-foreground block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors"
-                                                    >
-                                                        <div className="text-sm font-bold leading-none">
-                                                            USER MANAGEMENT
-                                                        </div>
-                                                        <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
-                                                            Step into the
-                                                            galactic frontier of
-                                                            user management.
-                                                        </p>
-                                                    </Link>
-                                                </NavigationMenuLink>
-                                            </li>
-                                        </ul>
-                                    </NavigationMenuContent>
-                                </NavigationMenuItem>
-                            )}
-                            <NavigationMenuItem>
                                 <Link href={`/decks`}>
                                     <NavigationMenuTrigger>
                                         <div className="flex items-center gap-2">
@@ -537,7 +431,7 @@ export const PageHeader = () => {
                                         </li>
                                     </ul>
                                 </NavigationMenuContent>
-                            </NavigationMenuItem>
+                            </NavigationMenuItem> */}
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
@@ -545,7 +439,7 @@ export const PageHeader = () => {
                 <div className="ml-auto flex items-center justify-center gap-x-2">
                     <ModeToggle />
 
-                    <UserNav />
+                    {/* <UserNav /> */}
                 </div>
             </div>
         </nav>

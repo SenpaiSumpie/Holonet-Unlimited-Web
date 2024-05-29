@@ -28,22 +28,6 @@ export const getCardById = async (id: string) => {
     }
 };
 
-export const createCard = async (data: CardData): Promise<CardResult> => {
-    try {
-        const card = await prisma.card.create({ data });
-        return {
-            Card: card,
-            Success: true,
-            Message: 'Set Created Successfully'
-        };
-    } catch (error) {
-        if (error instanceof Error) {
-            return { Success: false, Message: error.message + '' };
-        }
-        return { Success: false, Message: 'Error Unknown' };
-    }
-};
-
 export const updateCard = async (
     id: string,
     data: CardData
