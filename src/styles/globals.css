@@ -7,6 +7,18 @@ body {
     @apply bg-white text-black dark:bg-black dark:text-white;
 }
 
+.floating-chat-kofi-popup-iframe {
+    background-color: transparent !important;
+}
+
+.floating-chat-kofi-popup-iframe-notice {
+    background-color: transparent !important;
+}
+
+.floatingchat-container {
+    background-color: transparent !important;
+}
+
 @layer base {
     :root {
         --background: 0 0% 100%;

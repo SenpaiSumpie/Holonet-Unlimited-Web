@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import Container from './Container';
+import { DiscordLogo } from '@phosphor-icons/react';
 
 const AppFooter = () => {
     return (
@@ -52,7 +55,7 @@ const AppFooter = () => {
                                 </li> */}
                                 <li>
                                     <a
-                                        href="#"
+                                        href="https://youtube.com/@bucketheadssw?si=xKBDnPTk81XFnPvQ"
                                         className="flex items-center space-x-3 transition hover:text-primary"
                                     >
                                         <svg
@@ -117,7 +120,7 @@ const AppFooter = () => {
                                         <span>Pintrest</span>
                                     </a>
                                 </li> */}
-                                <li>
+                                {/* <li>
                                     <a
                                         href="#"
                                         className="flex items-center space-x-3 transition hover:text-primary"
@@ -131,10 +134,10 @@ const AppFooter = () => {
                                         />
                                         <span>Patreon</span>
                                     </a>
-                                </li>
+                                </li> */}
                                 <li>
                                     <a
-                                        href="#"
+                                        href="https://www.instagram.com/bucketheadssw?igsh=MTVsZWN5cmExejA4bA%3D%3D&utm_source=qr"
                                         className="flex items-center space-x-3 transition hover:text-primary"
                                     >
                                         <svg
@@ -148,15 +151,25 @@ const AppFooter = () => {
                                         <span>Instagram</span>
                                     </a>
                                 </li>
+                                <li>
+                                    <a
+                                        href="https://discord.gg/JAWeZV6DKJ"
+                                        className="flex items-center space-x-3 transition hover:text-primary"
+                                    >
+                                        <DiscordLogo size={24} />
+                                        <span>Discord</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         <div className="m-auto mt-16 w-10/12 space-y-6 text-center sm:mt-auto sm:w-5/12 sm:text-left">
                             <span className="block text-gray-500 dark:text-gray-400">
-                                A deck building resource for
+                                A deck testing resource for STAR WARS: Unlimited
                             </span>
 
                             <span className="block text-gray-500 dark:text-gray-400">
-                                Holonet Unlimited &copy; <span id="year"></span>
+                                Holonet Unlimited &copy;{' '}
+                                <span id="year">2024</span>
                             </span>
 
                             <span className="flex justify-between text-gray-600 dark:text-white">

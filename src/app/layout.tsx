@@ -4,6 +4,8 @@ import { Barlow } from 'next/font/google';
 
 import type { Metadata } from 'next';
 
+import Script from 'next/script';
+
 import ThemeProvider from '@/modules/home/providers/theme-provider';
 
 import { PageLayout } from '@/modules/home/components/page-layout';
@@ -41,6 +43,18 @@ export default async function RootLayout({
                     <Toaster position="bottom-right" />
                     <PageLayout>{children}</PageLayout>
                 </ThemeProvider>
+                <Script
+                    src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"
+                    strategy="beforeInteractive"
+                />
+                <Script id="kofi-donations" strategy="beforeInteractive">
+                    {`kofiWidgetOverlay.draw('holonet', {
+                        'type': 'floating-chat',
+    'floating-chat.donateButton.text': 'Support Us',
+    'floating-chat.donateButton.background-color': '#ffffff',
+    'floating-chat.donateButton.text-color': '#323842'
+                    });`}
+                </Script>
             </body>
         </html>
     );

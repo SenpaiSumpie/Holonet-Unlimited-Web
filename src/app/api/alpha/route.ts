@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
 
         if (existingUser) {
             return NextResponse.json(
-                { message: 'Email already exists' },
+                { message: 'This email has already been submitted.' },
                 { status: 400 }
             );
         }

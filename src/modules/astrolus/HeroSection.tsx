@@ -64,7 +64,7 @@ const HeroSection = () => {
                         <div className="mt-16 flex flex-wrap justify-center gap-y-4 gap-x-6">
                             <AlphaForm />
                         </div>
-                        <div className="hidden py-8 mt-16 border-y border-gray-100 dark:border-gray-800 sm:flex justify-between">
+                        {/* <div className="hidden py-8 mt-16 border-y border-gray-100 dark:border-gray-800 sm:flex justify-between">
                             <div className="text-left">
                                 <Button variant="link">
                                     <Link href="https://docs.google.com/spreadsheets/d/1cfWOQPM8TdET-dPd-o5fG7gS6iRd9YAvigvHqW3GOcg/edit?usp=sharing">
@@ -90,8 +90,8 @@ const HeroSection = () => {
                                     </h6>
                                 </Link>
                             </Button>
-                        </div>
-                        <Carousel>
+                        </div> */}
+                        <Carousel className="mt-4">
                             <CarouselContent>
                                 {Array.from({ length: 6 }).map((_, index) => (
                                     <CarouselItem key={index}>
