@@ -53,7 +53,7 @@ const AppFooter = () => {
                                         <span>Twitter</span>
                                     </a>
                                 </li> */}
-                                <li>
+                                {/* <li>
                                     <a
                                         href="https://youtube.com/@bucketheadssw?si=xKBDnPTk81XFnPvQ"
                                         className="flex items-center space-x-3 transition hover:text-primary"
@@ -68,7 +68,7 @@ const AppFooter = () => {
                                         </svg>
                                         <span>YouTube</span>
                                     </a>
-                                </li>
+                                </li> */}
 
                                 {/* <li>
                                     <a
@@ -135,7 +135,7 @@ const AppFooter = () => {
                                         <span>Patreon</span>
                                     </a>
                                 </li> */}
-                                <li>
+                                {/* <li>
                                     <a
                                         href="https://www.instagram.com/bucketheadssw?igsh=MTVsZWN5cmExejA4bA%3D%3D&utm_source=qr"
                                         className="flex items-center space-x-3 transition hover:text-primary"
@@ -150,7 +150,7 @@ const AppFooter = () => {
                                         </svg>
                                         <span>Instagram</span>
                                     </a>
-                                </li>
+                                </li> */}
                                 <li>
                                     <a
                                         href="https://discord.gg/JAWeZV6DKJ"
