@@ -61,9 +61,9 @@ const HeroSection = () => {
                                 </span>
                             </a>
                         </div> */}
-                        <div className="mt-16 flex flex-wrap justify-center gap-y-4 gap-x-6">
+                        {/* <div className="mt-16 flex flex-wrap justify-center gap-y-4 gap-x-6">
                             <AlphaForm />
-                        </div>
+                        </div> */}
                         {/* <div className="hidden py-8 mt-16 border-y border-gray-100 dark:border-gray-800 sm:flex justify-between">
                             <div className="text-left">
                                 <Button variant="link">
